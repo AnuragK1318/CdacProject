@@ -1,0 +1,6 @@
+@E_Police_Connect_HostAddress = http://localhost:5089
+
+GET {{E_Police_Connect_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
