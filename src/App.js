@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CivilianLogin from './components/CivilianLogin';
+import CivilianSignup from './components/CivilianSignup';
+import FileComplaint from './components/FileComplaint';
+import PoliceLogin from './components/PoliceLogin';
+import PoliceDashboard from './components/PoliceDashboard';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/civilian-login" element={<CivilianLogin />} />
+        <Route path="/civilian-signup" element={<CivilianSignup />} />
+        <Route path="/file-complaint" element={<FileComplaint />} />
+        <Route path="/police-login" element={<PoliceLogin />} />
+        <Route path="/police-dashboard" element={<PoliceDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
