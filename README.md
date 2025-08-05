@@ -41,7 +41,7 @@ Setup Instructions:
 -------------------
 1. Clone the repository:
 
-   git clone https://github.com/your-username/e-police-connect.git
+   git clone (https://github.com/omkar3839/CdacProject.git)
 
 2. Navigate into the project directory:
 
