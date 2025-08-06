@@ -1,0 +1,859 @@
+1)Replace all .js Files with the given below 
+
+2)execute this query in complaint table
+ALTER TABLE Complaint
+ALTER COLUMN date_filed DATETIME NULL;
+
+3)Change in model class of complaint.cs
+ [Column("date_filed")]
+ public DateTime? DateFiled { get; set; }
+
+4)in civilian.cs
+
+ [Column("email")]
+ [StringLength(100)]
+ [RegularExpression(@"^[^@\s]+@(yahoo\.com|gmail\.com)$",
+ ErrorMessage = "Email must be a valid Yahoo or Gmail address.")]
+ [Unicode(false)]
+ public string? Email { get; set; }
+
+
+
+ [Column("password")]
+ [StringLength(100)]
+ [Unicode(false)]
+ [RegularExpression(
+ @"^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_+=])([a-zA-Z0-9!@#$%^&*()\-_+=]{6,12})$",
+ ErrorMessage = "Password must be 6-12 characters long, contain at least one uppercase letter, one number, and one special character.")]
+ public string? Password { get; set; }
+
+
+5)in officer.cs
+
+ [Column("email")]
+ [StringLength(100)]
+ [RegularExpression(@"^[^@\s]+@(yahoo\.com|gmail\.com|maha.gov.in)$",
+ ErrorMessage = "Email must be a valid Yahoo, Gmail, or maha.gov.in address")]
+ [Unicode(false)]
+ public string? Email { get; set; }
+
+ [Column("password")]
+ [StringLength(100)]
+ [Unicode(false)]
+ [RegularExpression(
+ @"^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()\-_+=])([a-zA-Z0-9!@#$%^&*()\-_+=]{6,12})$",
+ ErrorMessage = "Password must be 6-12 characters long, contain at least one uppercase letter, one number, and one special character.")]
+ public string? Password { get; set; }
+
+--------------------------------------------------------------------------------------------------------------------------
+import React, { useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const CivilianLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post('https://localhost:44388/api/auth/login-civilian', {
+        email,
+        password
+      });
+
+      const { token, fullName, civilianId } = res.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('civilianName', fullName);
+      localStorage.setItem('civilianId', civilianId);
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      alert("✅ Civilian login successful!");
+
+      window.location.href = '/file-complaint';
+    } catch (err) {
+      alert('❌Login failed. Check your credentials.');
+    }
+  };
+
+  return (
+    <div className="container mt-5">
+      <div className="card shadow mx-auto" style={{ maxWidth: '450px' }}>
+        <div className="card-body">
+          <h3 className="text-center mb-4">Civilian Login</h3>
+          <form onSubmit={handleLogin}>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CivilianLogin;
+-----------------------------------------------------------------------------------------------------------------------------
+import React, { useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+export default function CivilianSignup() {
+  const [form, setForm] = useState({
+    name: '', email: '', phone: '', address: '', password: ''
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("https://localhost:44388/api/Civilian/signup", form);
+      alert("✅ Signup successful!");
+      window.location.href = '/civilian-login';
+    } catch (error) {
+      if (error.response && error.response.data) {
+        alert("Error: " + error.response.data);
+      } else {
+        alert("❌Signup failed. Check console for details.");
+        console.error(error);
+      }
+    }
+  };
+
+  return (
+    <div className="container mt-5">
+      <div className="card mx-auto shadow" style={{ maxWidth: '500px' }}>
+        <div className="card-body">
+          <h3 className="text-center mb-4">Civilian Signup</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Name</label>
+              <input name="name" className="form-control" placeholder="Full Name" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input name="email" type="email" className="form-control" placeholder="Email" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Phone</label>
+              <input name="phone" className="form-control" placeholder="Phone Number" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Address</label>
+              <textarea name="address" className="form-control" placeholder="Address" onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input name="password" type="password" className="form-control" placeholder="Password" onChange={handleChange} required />
+            </div>
+            <button type="submit" className="btn btn-success w-100">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const ComplaintsPage = () => {
+  const [complaints, setComplaints] = useState([]);
+  const [error, setError] = useState('');
+  const isDesignated = localStorage.getItem('isDesignated') === 'true';
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get('https://localhost:44388/api/Complaints', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => setComplaints(res.data))
+    .catch(() => setError('⚠️ Failed to load complaints'));
+  }, []);
+
+  const updateComplaintStatus = async (complaintId, newStatus) => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.put(`https://localhost:44388/api/Complaints/${complaintId}/status`, `"${newStatus}"`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const res = await axios.get('https://localhost:44388/api/Complaints', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setComplaints(res.data);
+    } catch {
+      setError('⚠️ Failed to update complaint status');
+    }
+  };
+
+  return (
+    <div className="container mt-5">
+      <h2 className="mb-4 text-center">📁 Complaints</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      {complaints.length === 0 ? (
+        <div className="text-center text-muted">No complaints found.</div>
+      ) : (
+        <ul className="list-group">
+          {complaints.map(c => (
+            <li
+              key={c.complaintId}
+              className="list-group-item d-flex justify-content-between align-items-start flex-wrap"
+            >
+              <div className="flex-grow-1 me-3">
+                <strong>{new Date(c.dateFiled).toLocaleString()}</strong>- {c.description}
+
+                <span className="badge bg-info text-dark ms-2">{c.status}</span>
+              </div>
+              {isDesignated && (
+                <div className="mt-2 mt-sm-0">
+                  <select
+                    className="form-select"
+                    style={{ minWidth: '140px' }}
+                    value={c.status}
+                    onChange={(e) => updateComplaintStatus(c.complaintId, e.target.value)}
+                  >
+                    <option value="open">Recieved</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="closed">Closed</option>
+                  </select>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="d-flex justify-content-center gap-3 mt-4">
+        <button className="btn btn-success" onClick={() => alert('✅Saved')}>
+          Save
+        </button>
+        <button
+          className="btn btn-secondary"
+          onClick={() => (window.location.href = '/police-dashboard')}
+        >
+          ⬅Back
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ComplaintsPage;
+-------------------------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const CriminalRecordsPage = () => {
+  const [criminals, setCriminals] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get('https://localhost:44388/api/Criminals', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => setCriminals(res.data))
+      .catch(() => setError('⚠️ Failed to load criminal records'));
+  }, []);
+
+  const filteredCriminals = criminals.filter(c =>
+    c.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="container mt-5">
+      <h2 className="mb-4 text-center">🔎 Criminal Records</h2>
+
+      <input
+        type="text"
+        className="form-control mb-4"
+        placeholder="Search by name..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      {filteredCriminals.length === 0 ? (
+        <div className="text-center text-muted">No records found.</div>
+      ) : (
+        <div className="row row-cols-1 row-cols-md-2 g-3">
+          {filteredCriminals.map(c => (
+            <div key={c.criminalId} className="col">
+              <div className="card h-100 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title">{c.name}</h5>
+                  <p className="card-text mb-1"><strong>Age:</strong> {c.age}</p>
+                  <p className="card-text mb-1"><strong>Gender:</strong> {c.gender}</p>
+                  <p className="card-text mb-1"><strong>Address:</strong> {c.address}</p>
+                  <p className="card-text mb-1"><strong>Arrested:</strong> {new Date(c.arrestDate).toLocaleDateString()}</p>
+                  <p className="card-text"><strong>Crime:</strong> {c.crimeCommitted}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="d-flex justify-content-center gap-3 mt-5">
+        {/* <button className="btn btn-success" onClick={() => alert('Saved')}>
+          Save
+        </button> */}
+        <button className="btn btn-secondary" onClick={() => navigate('/police-dashboard')}>
+          Back 
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default CriminalRecordsPage;
+-----------------------------------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const FileComplaint = () => {
+  const [description, setDescription] = useState('');
+  const [complaints, setComplaints] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const civilianId = localStorage.getItem('civilianId');
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (!civilianId) {
+      setError('Not authorized');
+      return;
+    }
+
+    axios
+      .get(`https://localhost:44388/api/Complaints/by-civilian/${civilianId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(res => setComplaints(res.data))
+      .catch(() => setError('Failed to load complaints'));
+  }, [civilianId, token]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!description.trim()) {
+      alert('Description is required');
+      return;
+    }
+
+    try {
+      await axios.post('https://localhost:44388/api/Complaints', {
+        civilianId,
+        description,
+        dateFiled: new Date().toISOString().split('T')[0],
+        status: 'open',
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      alert('✅ Complaint filed successfully');
+      setDescription('');
+
+      const res = await axios.get(`https://localhost:44388/api/Complaints/by-civilian/${civilianId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setComplaints(res.data);
+    } catch {
+      setError('❌Failed to file complaint');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/civilian-login');
+  };
+
+  return (
+    <div className="container py-5">
+      <h2 className="mb-4 text-center">📝 File a New Complaint</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
+
+      <form onSubmit={handleSubmit} className="mb-5">
+        <div className="mb-3">
+          <label className="form-label">Complaint Description</label>
+          <textarea
+            className="form-control"
+            placeholder="Describe your complaint..."
+            rows="4"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </div>
+        <button type="submit" className="btn btn-primary">Submit Complaint</button>
+      </form>
+
+      <h3 className="mb-3">📋 Your Complaints</h3>
+      {complaints.length === 0 ? (
+        <p className="text-muted">You haven't filed any complaints yet.</p>
+      ) : (
+        <div className="row row-cols-1 row-cols-md-2 g-3">
+          {complaints.map(c => (
+            <div key={c.complaintId} className="col">
+              <div className="card h-100 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title mb-2">📅 {new Date(c.dateFiled).toLocaleString()}</h5>
+
+                  <p className="card-text"><strong>Status:</strong> <span className={`badge bg-${c.status === 'resolved' ? 'success' : 'warning'}`}>{c.status}</span></p>
+                  <p className="card-text"><strong>Description:</strong> {c.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="d-flex justify-content-center gap-3 mt-5">
+        {/* <button className="btn btn-success" onClick={() => alert('Saved')}>Save</button> */}
+        {/* <button className="btn btn-secondary" onClick={() => navigate('/')}>Back to Home</button> */}
+        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+      </div>
+    </div>
+  );
+};
+
+export default FileComplaint;
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+in Home.js(change only one line)
+--><p className="lead mb-5">Welcome! Please choose your Option from below.</p>
+------------------------------------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import * as XLSX from 'xlsx';
+import { useNavigate } from 'react-router-dom';
+
+const IncidentReportsPage = () => {
+  const [incidents, setIncidents] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get('https://localhost:44388/api/IncidentReports', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => setIncidents(res.data))
+      .catch(() => setError('⚠️ Failed to load incident reports.'));
+  }, []);
+
+  const handleDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(incidents);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Incident Reports");
+    XLSX.writeFile(workbook, "IncidentReports.xlsx");
+  };
+
+ return (
+  <div className="container my-5">
+    <h2 className="mb-4">📋 Incident Reports</h2>
+
+    {error && <div className="alert alert-danger">{error}</div>}
+
+    {incidents.length === 0 && !error ? (
+      <p>Loading incident reports...</p>
+    ) : (
+      <div className="table-responsive">
+        <table className="table table-bordered table-hover shadow-sm">
+          <thead className="table-dark">
+            <tr>
+              <th>📍 Location</th>
+              <th>📝 Description</th>
+              <th>📅 Report Date</th>
+              <th>⏰ Report Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {incidents.map((i) => (
+              <tr key={i.reportId}>
+                <td>{i.location}</td>
+                <td>{i.description}</td>
+                <td>{new Date(i.reportDate).toLocaleDateString()}</td>
+                <td>{new Date(i.reportDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    <div className="mt-4 d-flex justify-content-end gap-2">
+      <button
+        className="btn btn-secondary"
+        onClick={() => navigate('/police-dashboard')}
+      >
+        🔙 Back to Dashboard
+      </button>
+
+      <button
+        className="btn btn-success"
+        onClick={handleDownload}
+      >
+        📥 Download Excel
+      </button>
+    </div>
+  </div>
+);
+
+};
+
+export default IncidentReportsPage;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+const PoliceDashboard = () => {
+  const officerName = localStorage.getItem('officerName');
+  const rank = localStorage.getItem('rank');
+  const isDesignated = localStorage.getItem('isDesignated') === 'true';
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/police-login');
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+       <div className="alert alert-primary shadow-sm p-4 rounded">
+  <h4 className="mb-2">
+    👮‍♂️ Welcome, Officer <span className="text-dark">{officerName || 'Unknown'}</span>
+  </h4>
+  <p className="mb-0">
+    <strong>🎖️ Rank:</strong> {rank || 'N/A'}
+  </p>
+   <p style={styles.subText}>
+        <strong>Status:</strong><strong> {isDesignated ? '✅ Designated' : '❌ Non-Designated'}</strong>
+    </p>
+</div>
+
+        <hr style={styles.divider} />
+
+        <h3 style={styles.sectionTitle}>📂 Dashboard Sections</h3>
+        <ul style={styles.linkList}>
+          <li><Link style={styles.link} to="/complaints">📁 Complaints</Link></li>
+          <li><Link style={styles.link} to="/criminal-records">🔎 Criminal Records</Link></li>
+          {isDesignated && (
+            <>
+              <li><Link style={styles.link} to="/incident-reports">📋 Incident Reports</Link></li>
+              <li><Link style={styles.link} to="/prison-records">🏛️ Prison Records</Link></li>
+            </>
+          )}
+        </ul>
+
+        <button onClick={handleLogout} style={styles.logoutBtn}>
+          🚪 Logout
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const styles = {
+  container: {
+    minHeight: '100vh',
+    backgroundColor: '#f0f4f8',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  card: {
+    backgroundColor: '#ffffff',
+    padding: '30px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    width: '100%',
+    maxWidth: '500px',
+    boxSizing: 'border-box',
+  },
+  header: {
+    margin: 0,
+    marginBottom: '10px',
+    color: '#2c3e50',
+  },
+  subText: {
+    margin: '6px 0',
+    fontSize: '16px',
+    color: '#555',
+  },
+  divider: {
+    margin: '20px 0',
+    borderColor: '#ccc',
+  },
+  sectionTitle: {
+    marginBottom: '12px',
+    color: '#34495e',
+  },
+  linkList: {
+    listStyleType: 'none',
+    padding: 0,
+    marginBottom: '20px',
+  },
+  link: {
+    display: 'block',
+    padding: '10px 15px',
+    marginBottom: '8px',
+    backgroundColor: '#ecf0f1',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    color: '#2c3e50',
+    fontWeight: '500',
+    transition: 'background 0.3s',
+  },
+  logoutBtn: {
+    width: '100%',
+    padding: '12px',
+    backgroundColor: 'crimson',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '16px',
+  },
+};
+
+export default PoliceDashboard;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const PoliceLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();       //to avoid refresh evry time
+    setErrorMsg('');          //clears any previous error message on the screen
+
+    try {
+      const res = await axios.post('https://localhost:44388/api/auth/login-officer', {
+        email,
+        password
+      });
+
+      const { token, name, officerId, rank, isDesignated } = res.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('officerName', name);
+      localStorage.setItem('officerId', officerId);
+      localStorage.setItem('rank', rank);
+      localStorage.setItem('isDesignated', isDesignated.toString());
+
+      //for all subsequent request add login token
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      alert('✅ Police login successful!');
+      window.location.href = '/police-dashboard';
+    } catch (err) {
+      setErrorMsg('❌ Login failed. Please check your credentials.');
+    }
+  };
+
+  return (
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
+      <div className="col-md-6">
+        <div className="card shadow p-4">
+          <h2 className="text-center text-primary mb-4">👮 Officers Login</h2>
+
+          {errorMsg && (
+            <div className="alert alert-danger" role="alert">
+              {errorMsg}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                className="form-control"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                className="form-control"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary w-100">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PoliceLogin;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
+
+const PrisonRecordsPage = () => {
+  const [prisons, setPrisons] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get('https://localhost:44388/api/PrisonRecords', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => setPrisons(res.data))
+      .catch(() => setError('❌ Failed to load prison records.'));
+  }, []);
+
+  const filteredPrisons = prisons.filter(p =>
+    !searchTerm || (p.criminalName && p.criminalName.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const handleDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filteredPrisons);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Prison Records");
+    XLSX.writeFile(workbook, "PrisonRecords.xlsx");
+  };
+
+  return (
+  <div className="container my-4">
+    <h2 className="text-center mb-4">🏛️ Prison Records</h2>
+
+    <div className="row mb-3">
+      <div className="col-md-8">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="🔍 Search by prisoner name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+    </div>
+
+    {error && <div className="alert alert-danger">{error}</div>}
+
+    {filteredPrisons.length === 0 ? (
+      <p>No matching prison records found.</p>
+    ) : (
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped table-hover shadow-sm">
+          <thead className="table-dark">
+            <tr>
+              <th>👤 Criminal Name</th>
+              <th>🏢 Prison Name</th>
+              <th>⛓️ Sentence (Years)</th>
+              <th>📅 Release Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredPrisons.map(p => (
+              <tr key={p.prisonId}>
+                <td>{p.criminalName || 'N/A'}</td>
+                <td>{p.prisonName}</td>
+                <td>{p.sentenceYears}</td>
+                <td>{p.releaseDate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    {/* Button row */}
+    <div className="mt-4 d-flex justify-content-end gap-2">
+      <button
+        className="btn btn-secondary"
+        onClick={() => navigate('/police-dashboard')}
+      >
+        ⬅ Back
+      </button>
+
+      <button
+        className="btn btn-success"
+        onClick={handleDownload}
+      >
+        📥 Download Excel
+      </button>
+    </div>
+  </div>
+);
+};
+
+export default PrisonRecordsPage;
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
