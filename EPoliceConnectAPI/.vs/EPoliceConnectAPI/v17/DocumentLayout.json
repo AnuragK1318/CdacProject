@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project_DAC\\EPoliceConnectAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\models\\epolicedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\models\\epolicedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\models\\prisonrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\models\\prisonrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\models\\officer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\models\\officer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\models\\complaint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\models\\complaint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\models\\civilian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\models\\civilian.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\controllers\\officerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\controllers\\officerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|d:\\project_dac\\epoliceconnectapi\\epoliceconnectapi\\controllers\\complaintscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CF79CFE-3F2B-4498-8069-A7F73C46DA4A}|EPoliceConnectAPI\\EPoliceConnectAPI.csproj|solutionrelative:epoliceconnectapi\\controllers\\complaintscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 322,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EPoliceDbContext.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\EPoliceDbContext.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Models\\EPoliceDbContext.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\EPoliceDbContext.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Models\\EPoliceDbContext.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T14:33:42.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OfficersController.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Controllers\\OfficersController.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Controllers\\OfficersController.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Controllers\\OfficersController.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Controllers\\OfficersController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAuwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T08:41:53.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Officer.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Officer.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Models\\Officer.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Officer.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Models\\Officer.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAuwCoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-07T06:57:08.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Civilian.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Civilian.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Models\\Civilian.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Civilian.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Models\\Civilian.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAUwDEAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T14:50:11.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Complaint.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Complaint.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Models\\Complaint.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\Complaint.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Models\\Complaint.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAB8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T13:51:24.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PrisonRecord.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\PrisonRecord.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Models\\PrisonRecord.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Models\\PrisonRecord.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Models\\PrisonRecord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T14:39:08.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ComplaintsController.cs",
+              "DocumentMoniker": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Controllers\\ComplaintsController.cs",
+              "RelativeDocumentMoniker": "EPoliceConnectAPI\\Controllers\\ComplaintsController.cs",
+              "ToolTip": "D:\\Project_DAC\\EPoliceConnectAPI\\EPoliceConnectAPI\\Controllers\\ComplaintsController.cs",
+              "RelativeToolTip": "EPoliceConnectAPI\\Controllers\\ComplaintsController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAzwE4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-06T08:20:11.443Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
