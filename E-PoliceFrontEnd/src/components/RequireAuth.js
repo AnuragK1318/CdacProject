@@ -11,6 +11,10 @@ const RequireAuth = ({ children, requiredRole }) => {
   }
 
   // Role-based restriction
+<<<<<<< HEAD
+  //a person trying to go in the designated section but is not designated
+=======
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
   if (requiredRole === 'Designated' && !isDesignated) {
     return <Navigate to="/unauthorized" />;
   }

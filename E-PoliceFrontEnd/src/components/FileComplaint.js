@@ -44,7 +44,11 @@ const FileComplaint = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+<<<<<<< HEAD
+      alert('✅ Complaint filed successfully');
+=======
       alert('Complaint filed successfully');
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
       setDescription('');
 
       const res = await axios.get(`https://localhost:44388/api/Complaints/by-civilian/${civilianId}`, {
@@ -52,7 +56,11 @@ const FileComplaint = () => {
       });
       setComplaints(res.data);
     } catch {
+<<<<<<< HEAD
+      setError('❌Failed to file complaint');
+=======
       setError('Failed to file complaint');
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
     }
   };
 
@@ -89,7 +97,12 @@ const FileComplaint = () => {
             <div key={c.complaintId} className="col">
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
+<<<<<<< HEAD
+                  <h5 className="card-title mb-2">📅 {new Date(c.dateFiled).toLocaleString()}</h5>
+
+=======
                   <h5 className="card-title mb-2">📅 {new Date(c.dateFiled).toLocaleDateString()}</h5>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
                   <p className="card-text"><strong>Status:</strong> <span className={`badge bg-${c.status === 'resolved' ? 'success' : 'warning'}`}>{c.status}</span></p>
                   <p className="card-text"><strong>Description:</strong> {c.description}</p>
                 </div>
@@ -100,8 +113,13 @@ const FileComplaint = () => {
       )}
 
       <div className="d-flex justify-content-center gap-3 mt-5">
+<<<<<<< HEAD
+        {/* <button className="btn btn-success" onClick={() => alert('Saved')}>Save</button> */}
+        {/* <button className="btn btn-secondary" onClick={() => navigate('/')}>Back to Home</button> */}
+=======
         <button className="btn btn-success" onClick={() => alert('Saved')}>Save</button>
         <button className="btn btn-secondary" onClick={() => navigate('/')}>Back to Home</button>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
         <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
       </div>
     </div>

@@ -30,7 +30,11 @@ function App() {
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/civilian-login">Civilian Login</Link>
           <Link className="nav-link" to="/civilian-signup">Civilian Signup</Link>
+<<<<<<< HEAD
+          {/* <Link className="nav-link" to="/file-complaint">File Complaint</Link> */}
+=======
           <Link className="nav-link" to="/file-complaint">File Complaint</Link>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
 
           {!isLoggedIn && (
             <Link className="nav-link" to="/police-login">Police Login</Link>
@@ -99,11 +103,19 @@ function App() {
         </Routes>
 
         {/* Logout button at bottom center */}
+<<<<<<< HEAD
+        {/* {isLoggedIn && (
+          <div className="d-flex justify-content-center mt-5">
+            <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+          </div>
+        )} */}
+=======
         {isLoggedIn && (
           <div className="d-flex justify-content-center mt-5">
             <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
           </div>
         )}
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
       </div>
     </Router>
   );

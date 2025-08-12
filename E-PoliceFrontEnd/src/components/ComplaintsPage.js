@@ -49,7 +49,12 @@ const ComplaintsPage = () => {
               className="list-group-item d-flex justify-content-between align-items-start flex-wrap"
             >
               <div className="flex-grow-1 me-3">
+<<<<<<< HEAD
+                <strong>{new Date(c.dateFiled).toLocaleString()}</strong>- {c.description}
+
+=======
                 <strong>{new Date(c.dateFiled).toLocaleDateString()}</strong> - {c.description}
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
                 <span className="badge bg-info text-dark ms-2">{c.status}</span>
               </div>
               {isDesignated && (
@@ -60,7 +65,11 @@ const ComplaintsPage = () => {
                     value={c.status}
                     onChange={(e) => updateComplaintStatus(c.complaintId, e.target.value)}
                   >
+<<<<<<< HEAD
+                    <option value="open">Recieved</option>
+=======
                     <option value="open">Open</option>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
                     <option value="ongoing">Ongoing</option>
                     <option value="closed">Closed</option>
                   </select>
@@ -72,14 +81,22 @@ const ComplaintsPage = () => {
       )}
 
       <div className="d-flex justify-content-center gap-3 mt-4">
+<<<<<<< HEAD
+        <button className="btn btn-success" onClick={() => alert('✅Saved')}>
+=======
         <button className="btn btn-success" onClick={() => alert('Saved')}>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
           Save
         </button>
         <button
           className="btn btn-secondary"
           onClick={() => (window.location.href = '/police-dashboard')}
         >
+<<<<<<< HEAD
+          ⬅Back
+=======
           Back
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
         </button>
       </div>
     </div>
