@@ -7,7 +7,11 @@ export default function Home() {
     <div className="container d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <div className="text-center">
         <h1 className="mb-4 fw-bold text-primary">🚨 E-Police Connect System</h1>
+<<<<<<< HEAD
         <p className="lead mb-5">Welcome! Please choose your Option from below.</p>
+=======
+        <p className="lead mb-5">Welcome! Please choose your login type below.</p>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
 
         <div className="d-grid gap-3 col-12 col-md-6 mx-auto">
           <Link to="/civilian-login" className="btn btn-outline-primary btn-lg">👤 Civilian Login</Link>
@@ -18,4 +22,7 @@ export default function Home() {
     </div>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9

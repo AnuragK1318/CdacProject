@@ -7,8 +7,13 @@ const PoliceLogin = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleLogin = async (e) => {
+<<<<<<< HEAD
     e.preventDefault();       //to avoid refresh evry time
     setErrorMsg('');          //clears any previous error message on the screen
+=======
+    e.preventDefault();
+    setErrorMsg('');
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
 
     try {
       const res = await axios.post('https://localhost:44388/api/auth/login-officer', {
@@ -24,7 +29,10 @@ const PoliceLogin = () => {
       localStorage.setItem('rank', rank);
       localStorage.setItem('isDesignated', isDesignated.toString());
 
+<<<<<<< HEAD
       //for all subsequent request add login token
+=======
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       alert('✅ Police login successful!');
@@ -38,7 +46,11 @@ const PoliceLogin = () => {
     <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
       <div className="col-md-6">
         <div className="card shadow p-4">
+<<<<<<< HEAD
           <h2 className="text-center text-primary mb-4">👮 Officers Login</h2>
+=======
+          <h2 className="text-center text-primary mb-4">👮 Police Login</h2>
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
 
           {errorMsg && (
             <div className="alert alert-danger" role="alert">

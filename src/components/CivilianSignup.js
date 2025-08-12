@@ -15,13 +15,21 @@ export default function CivilianSignup() {
     e.preventDefault();
     try {
       await axios.post("https://localhost:44388/api/Civilian/signup", form);
+<<<<<<< HEAD
       alert("✅ Signup successful!");
       window.location.href = '/civilian-login';
+=======
+      alert("Signup successful!");
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
     } catch (error) {
       if (error.response && error.response.data) {
         alert("Error: " + error.response.data);
       } else {
+<<<<<<< HEAD
         alert("❌Signup failed. Check console for details.");
+=======
+        alert("Signup failed. Check console for details.");
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
         console.error(error);
       }
     }

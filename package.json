@@ -13,8 +13,12 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.7.1",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
+=======
+    "web-vitals": "^2.1.4"
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
   },
   "scripts": {
     "start": "react-scripts start",

@@ -23,11 +23,18 @@ const CivilianLogin = () => {
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+<<<<<<< HEAD
       alert("✅ Civilian login successful!");
 
       window.location.href = '/file-complaint';
     } catch (err) {
       alert('❌Login failed. Check your credentials.');
+=======
+      alert('Civilian login successful!');
+      window.location.href = '/file-complaint';
+    } catch (err) {
+      alert('Login failed. Check your credentials.');
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
     }
   };
 

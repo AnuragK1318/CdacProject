@@ -58,11 +58,19 @@ const CriminalRecordsPage = () => {
       )}
 
       <div className="d-flex justify-content-center gap-3 mt-5">
+<<<<<<< HEAD
         {/* <button className="btn btn-success" onClick={() => alert('Saved')}>
           Save
         </button> */}
         <button className="btn btn-secondary" onClick={() => navigate('/police-dashboard')}>
           Back 
+=======
+        <button className="btn btn-success" onClick={() => alert('Saved')}>
+          Save
+        </button>
+        <button className="btn btn-secondary" onClick={() => navigate('/police-dashboard')}>
+          Back to Dashboard
+>>>>>>> a33411ec90484a4de5429dc10c9d34c8c67fb2f9
         </button>
       </div>
     </div>
